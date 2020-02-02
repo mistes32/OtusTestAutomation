@@ -7,12 +7,12 @@ public class WebDriverFactory {
 
 
     public static WebDriver createNewDriver(Browser browser) {
-        return browser.driver().get();
+        return browser.setup().driver().get();
 
     }
 
     public static WebDriver createNewDriver(Browser browser, Capabilities caps) {
-        return browser.driverWithCaps().apply(caps);
+        return browser.setup().driverWithCaps().apply(caps);
 
     }
 
