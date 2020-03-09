@@ -12,7 +12,7 @@ public class MobileCatalog extends Page {
     private static final String SEARCH_TEXT_INPUT = SEARCHBOX + " input[type=text]";
     private static final String ALL_FILTERS_BUTTON = "[data-zone-name=all-filters-button] [href]";
     private static final String POPUP_TITLE = ".popup-informer__title";
-    private static final By COMPARE = By.cssSelector(".header2-menu__item_type_compare");
+    private static final By COMPARE_POPUP = By.cssSelector(".popup-informer__controls a");
 
 
     private static final String CELL_COMPARE = ".n-user-lists_type_compare";
@@ -70,8 +70,9 @@ public class MobileCatalog extends Page {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(POPUP_TITLE))).getText();
     }
 
-    public void clickCompare() {
-        wait.until(ExpectedConditions.elementToBeClickable(COMPARE)).click();
+    public Compare clickCompareInPopup() {
+        wait.until(ExpectedConditions.elementToBeClickable(COMPARE_POPUP)).click();
+        return new Compare(this.driver);
     }
 
     public class Cell {
