@@ -14,7 +14,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.otus.page.*;
 
-import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
@@ -50,9 +49,12 @@ public class AppTest {
     public void test() {
         Main main = new Main(driver);
         main.open();
-        Cookie cookie = new Cookie("spravka", Settings.SUT.spravka(), ".yandex.ru", "/", java.sql.Date.valueOf(LocalDate.now().plusDays(1)));
-        driver.manage().deleteCookieNamed("spravka");
-        driver.manage().addCookie(cookie);
+        Optional<String> cookie = Optional.ofNullable(Settings.SUT.spravka());
+        cookie.map(spravkaVal -> new Cookie("spravka", spravkaVal))
+                .ifPresent(cookie1 -> {
+                    driver.manage().deleteCookieNamed("spravka");
+                    driver.manage().addCookie(cookie1);
+                });
         MobileCatalog mobileCatalog = new MobileCatalog(driver);
         mobileCatalog.open();
         Filter<MobileCatalog> filter = mobileCatalog

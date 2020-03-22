@@ -4,6 +4,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
+import ru.otus.configuration.SutConfigurationException;
 
 public abstract class Page {
     public static long DEFAULT_TIMEOUT = 30L;
